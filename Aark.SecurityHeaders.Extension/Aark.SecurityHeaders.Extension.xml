@@ -1,0 +1,626 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Aark.SecurityHeaders.Extension</name>
+    </assembly>
+    <members>
+        <member name="T:Aark.SecurityHeaders.Extension.Constants.ContentSecurityPolicyConstants">
+            <summary>
+            The HTTP Content-Security-Policy response header allows web site administrators to control resources the user agent is allowed to load for a given page. With a few exceptions, policies mostly involve specifying server origins and script endpoints. This helps guard against cross-site scripting attacks (XSS).
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.ContentSecurityPolicyConstants.Header">
+            <summary>
+            Header value for Content-Security-Policy
+            </summary>
+        </member>
+        <member name="T:Aark.SecurityHeaders.Extension.Constants.ContentSecurityPolicyConstants.FetchDirectives">
+            <summary>
+            Fetch directives control locations from which certain resource types may be loaded.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.ContentSecurityPolicyConstants.FetchDirectives.ChildSrc">
+            <summary>
+            Defines the valid sources for web workers and nested browsing contexts loaded using elements such as frame and iframe.
+            Instead of child-src, authors who wish to regulate nested browsing contexts and workers should use the frame-src and worker-src directives, respectively.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.ContentSecurityPolicyConstants.FetchDirectives.ConnectSrc">
+            <summary>
+            Restricts the URLs which can be loaded using script interfaces.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.ContentSecurityPolicyConstants.FetchDirectives.DefaultSrc">
+            <summary>
+            Serves as a fallback for the other fetch directives.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.ContentSecurityPolicyConstants.FetchDirectives.FontSrc">
+            <summary>
+            Specifies valid sources for fonts loaded using @font-face.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.ContentSecurityPolicyConstants.FetchDirectives.FrameSrc">
+            <summary>
+            Specifies valid sources for nested browsing contexts loading using elements such as frame and iframe.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.ContentSecurityPolicyConstants.FetchDirectives.ImgSrc">
+            <summary>
+            Specifies valid sources of images and favicons.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.ContentSecurityPolicyConstants.FetchDirectives.ManifestSrc">
+            <summary>
+            Specifies valid sources of application manifest files.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.ContentSecurityPolicyConstants.FetchDirectives.MediaSrc">
+            <summary>
+            Specifies valid sources for loading media using the audio, video and track elements.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.ContentSecurityPolicyConstants.FetchDirectives.ObjectSrc">
+            <summary>
+            Specifies valid sources for the object, embed, and applet elements.
+            Elements controlled by object-src are perhaps coincidentally considered legacy HTML elements and are not recieving new standardized features(such as the security attributes sandbox or allow for iframe). Therefore it is recommended to restrict this fetch-directive (e.g.explicitly set object-src 'none' if possible).
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.ContentSecurityPolicyConstants.FetchDirectives.PrefetchSrc">
+            <summary>
+            Specifies valid sources to be prefetched or prerendered.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.ContentSecurityPolicyConstants.FetchDirectives.ScriptSrc">
+            <summary>
+            Specifies valid sources for JavaScript.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.ContentSecurityPolicyConstants.FetchDirectives.ScriptSrcElem">
+            <summary>
+            Specifies valid sources for JavaScript script elements.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.ContentSecurityPolicyConstants.FetchDirectives.ScriptSrcAttr">
+            <summary>
+            Specifies valid sources for JavaScript inline event handlers.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.ContentSecurityPolicyConstants.FetchDirectives.StyleSrc">
+            <summary>
+            Specifies valid sources for stylesheets.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.ContentSecurityPolicyConstants.FetchDirectives.StyleSrcElem">
+            <summary>
+            Specifies valid sources for stylesheets style elements and link elements with rel="stylesheet".
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.ContentSecurityPolicyConstants.FetchDirectives.StyleSrcAttr">
+            <summary>
+            Specifies valid sources for inline styles applied to individual DOM elements.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.ContentSecurityPolicyConstants.FetchDirectives.WorkerSrc">
+            <summary>
+            Specifies valid sources for Worker, SharedWorker, or ServiceWorker scripts.
+            </summary>
+        </member>
+        <member name="T:Aark.SecurityHeaders.Extension.Constants.ContentTypeOptionsConstants">
+            <summary>
+            X-Content-Type-Options-related constants.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.ContentTypeOptionsConstants.Header">
+            <summary>
+            Header value for X-Content-Type-Options
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.ContentTypeOptionsConstants.NoSniff">
+            <summary>
+            Disables content sniffing
+            </summary>
+        </member>
+        <member name="T:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants">
+            <summary>
+            The HTTP Feature-Policy  header provides a mechanism to allow and deny the use of browser features in its own frame, and in content within any iframe elements in the document.
+            </summary>
+        </member>
+        <member name="T:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.Directive">
+            <summary>
+            Fetch directives control locations from which certain resource types may be loaded.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.Directive.AllowAll">
+            <summary>
+            The feature will be allowed in this document, and all nested browsing contexts(iframes) regardless of their origin.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.Directive.AllowSelf">
+            <summary>
+            The feature will be allowed in this document, and in all nested browsing contexts (iframes) in the same origin.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.Directive.AllowSrc">
+            <summary>
+            (In an iframe allow attribute only) The feature will be allowed in this iframe, as long as the document loaded into it comes from the same origin as the URL in the iframe's src attribute.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.Directive.DenyAll">
+            <summary>
+            The feature is disabled in top-level and nested browsing contexts.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.Directive.AllowOrigin">
+            <summary>
+            The feature is allowed for specific origins(for example, https://example.com). Origins should be separated by a space.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.Header">
+            <summary>
+            Header value for Feature-Policy
+            </summary>
+        </member>
+        <member name="T:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.HttpFeatures">
+            <summary>
+            Feature Policy allows web developers to selectively enable, disable, and modify the behavior of certain features and APIs in the browser. It is similar to Content Security Policy but controls features instead of security behavior.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.HttpFeatures.Accelerometer">
+            <summary>
+            Controls whether the current document is allowed to gather information about the acceleration of the device through the Accelerometer interface.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.HttpFeatures.AmbientLightSensor">
+            <summary>
+            Controls whether the current document is allowed to gather information about the amount of light in the environment around the device through the AmbientLightSensor interface.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.HttpFeatures.Autoplay">
+            <summary>
+            Controls whether the current document is allowed to autoplay media requested through the HTMLMediaElement interface. When this policy is enabled and there were no user gestures, the Promise returned by HTMLMediaElement.play() will reject with a DOMException. The autoplay attribute on audio and video elements will be ignored.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.HttpFeatures.Battery">
+            <summary>
+            Controls whether the use of the Battery Status API is allowed. When this policy is enaled, the Promise returned by Navigator.getBattery() will reject with a NotAllowedError DOMException.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.HttpFeatures.Camera">
+            <summary>
+            Controls whether the current document is allowed to use video input devices. When this policy is enabled, the Promise returned by getUserMedia() will reject with a NotAllowedError DOMException.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.HttpFeatures.DisplayCapture">
+            <summary>
+            Controls whether or not the current document is permitted to use the getDisplayMedia() method to capture screen contents. When this policy is enabled, the promise returned by getDisplayMedia() will reject with a NotAllowedError if permission is not obtained to capture the display's contents.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.HttpFeatures.DocumentDomain">
+            <summary>
+            Controls whether the current document is allowed to set document.domain. When this policy is enabled, attempting to set document.domain will fail and cause a SecurityError DOMException to be be thrown.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.HttpFeatures.EncryptedMedia">
+            <summary>
+            Controls whether the current document is allowed to use the Encrypted Media Extensions API (EME). When this policy is enabled, the Promise returned by Navigator.requestMediaKeySystemAccess() will reject with a DOMException.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.HttpFeatures.ExecutionWhileNotRendered">
+            <summary>
+            Controls whether tasks should execute in frames while they're not being rendered (e.g. if an iframe is hidden or display: none).
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.HttpFeatures.ExecutionWhileOutOfViewport">
+            <summary>
+            Controls whether tasks should execute in frames while they're outside of the visible viewport.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.HttpFeatures.Fullscreen">
+            <summary>
+            Controls whether the current document is allowed to use Element.requestFullScreen(). When this policy is enabled, the returned Promise rejects with a TypeError DOMException.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.HttpFeatures.Geolocation">
+            <summary>
+            Controls whether the current document is allowed to use the Geolocation Interface. When this policy is enabled, calls to getCurrentPosition() and watchPosition() will cause those functions' callbacks to be invoked with a PositionError code of PERMISSION_DENIED.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.HttpFeatures.Gyroscope">
+            <summary>
+            Controls whether the current document is allowed to gather information about the orientation of the device through the Gyroscope interface.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.HttpFeatures.LayoutAnimations">
+            <summary>
+            Controls whether the current document is allowed to show layout animations.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.HttpFeatures.LegacyImageFormats">
+            <summary>
+            Controls whether the current document is allowed to display images in legacy formats.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.HttpFeatures.Magnetometer">
+            <summary>
+            Controls whether the current document is allowed to gather information about the orientation of the device through the Magnetometer interface.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.HttpFeatures.Microphone">
+            <summary>
+            Controls whether the current document is allowed to use audio input devices. When this policy is enabled, the Promise returned by MediaDevices.getUserMedia() will reject with a NotAllowedError.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.HttpFeatures.Midi">
+            <summary>
+            Controls whether the current document is allowed to use the Web MIDI API. When this policy is enabled, the Promise returned by Navigator.requestMIDIAccess() will reject with a DOMException.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.HttpFeatures.NavigationOverride">
+            <summary>
+            Controls the availability of mechanisms that enables the page author to take control over the behavior of spatial navigation, or to cancel it outright.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.HttpFeatures.OversizedImages">
+            <summary>
+            Controls whether the current document is allowed to download and display large images.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.HttpFeatures.Payment">
+            <summary>
+            Controls whether the current document is allowed to use the Payment Request API. When this policy is enabled, the PaymentRequest() constructor will throw a SecurityError DOMException.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.HttpFeatures.PictureInPicture">
+            <summary>
+            Controls whether the current document is allowed to play a video in a Picture-in-Picture mode via the corresponding API.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.HttpFeatures.PublickeyCredentials">
+            <summary>
+            Controls whether the current document is allowed to use Web Authentication API to create, store, and retreive public-key credentials.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.HttpFeatures.Speaker">
+            <summary>
+            Controls whether the current document is allowed to play audio via any methods.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.HttpFeatures.SyncXhr">
+            <summary>
+            Controls whether the current document is allowed to make synchronous XMLHttpRequest requests.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.HttpFeatures.Usb">
+            <summary>
+            Controls whether the current document is allowed to use the WebUSB API.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.HttpFeatures.WakeLock">
+            <summary>
+            Controls whether the current document is allowed to use Wake Lock API to indicate that device should not enter power-saving mode.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.HttpFeatures.XrSpatialTracking">
+            <summary>
+            Controls whether or not the current document is allowed to use the WebXR Device API to interact with a WebXR session.
+            </summary>
+        </member>
+        <member name="T:Aark.SecurityHeaders.Extension.Constants.FrameOptionsConstants">
+            <summary>
+            X-Frame-Options-related constants.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.FrameOptionsConstants.Header">
+            <summary>
+            The header value for X-Frame-Options
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.FrameOptionsConstants.Deny">
+            <summary>
+            The page cannot be displayed in a frame, regardless of the site attempting to do so.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.FrameOptionsConstants.SameOrigin">
+            <summary>
+            The page can only be displayed in a frame on the same origin as the page itself.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.FrameOptionsConstants.AllowFromUri">
+            <summary>
+            The page can only be displayed in a frame on the specified origin. {0} specifies the format string
+            </summary>
+        </member>
+        <member name="T:Aark.SecurityHeaders.Extension.Constants.ServerConstants">
+            <summary>
+            Server headery-related constants.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.ServerConstants.Header">
+            <summary>
+            The header value for X-Powered-By
+            </summary>
+        </member>
+        <member name="T:Aark.SecurityHeaders.Extension.Constants.ReferrerPolicyConstants">
+            <summary>
+            Constants for the Referrer Policy.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.ReferrerPolicyConstants.Header">
+            <summary>
+            Header value for Referrer-Policy
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.ReferrerPolicyConstants.NoReferrer">
+            <summary>
+            The Referer header will be omitted entirely. No referrer information is sent along with requests
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.ReferrerPolicyConstants.NoReferrerWhenDowngrade">
+            <summary>
+            This is the default behavior if no policy is specified, or if the provided value is invalid. The origin, path, and querystring of the URL are sent as a referrer 
+            when the protocol security level stays the same (HTTP→HTTP, HTTPS→HTTPS) or improves (HTTP→HTTPS), but isn't sent to less secure destinations (HTTPS→HTTP).
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.ReferrerPolicyConstants.Origin">
+            <summary>
+            Only send the origin of the document as the referrer.
+            For example, a document at https://example.com/page.html will send the referrer https://example.com/.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.ReferrerPolicyConstants.OriginWhenCrossOrigin">
+            <summary>
+            Send the origin, path, and query string when performing a same-origin request, but only send the origin of the document for other cases.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.ReferrerPolicyConstants.SameOrigin">
+            <summary>
+            A referrer will be sent for same-site origins, but cross-origin requests will send no referrer information.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.ReferrerPolicyConstants.StrictOrigin">
+            <summary>
+            A referrer will be sent for same-site origins, but cross-origin requests will send no referrer information.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.ReferrerPolicyConstants.StrictOriginWhenCrossOrigin">
+            <summary>
+            Send the origin, path, and query string when performing a same-origin request, but only send the origin of the document for other cases
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.ReferrerPolicyConstants.UnsafeUrl">
+            <summary>
+            Send the origin, path, and query string when performing any request, regardless of security
+            This policy will leak potentially-private information from HTTPS resource URLs to insecure origins. Carefully consider the impact of this setting.
+            </summary>
+        </member>
+        <member name="T:Aark.SecurityHeaders.Extension.Constants.StrictTransportSecurityConstants">
+            <summary>
+            Strict-Transport-Security-related constants.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.StrictTransportSecurityConstants.Header">
+            <summary>
+            Header value for Strict-Transport-Security
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.StrictTransportSecurityConstants.MaxAge">
+            <summary>
+            Tells the user-agent to cache the domain in the STS list for the provided number of seconds {0} 
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.StrictTransportSecurityConstants.MaxAgeIncludeSubdomains">
+            <summary>
+            Tells the user-agent to cache the domain in the STS list for the provided number of seconds {0} and include any sub-domains.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.StrictTransportSecurityConstants.NoCache">
+            <summary>
+            Tells the user-agent to remove, or not cache the host in the STS cache.
+            </summary>
+        </member>
+        <member name="T:Aark.SecurityHeaders.Extension.Constants.XssProtectionConstants">
+            <summary>
+            X-XSS-Protection-related constants.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.XssProtectionConstants.Header">
+            <summary>
+            Header value for X-XSS-Protection
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.XssProtectionConstants.Enabled">
+            <summary>
+            Enables the XSS Protections
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.XssProtectionConstants.Disabled">
+            <summary>
+            Disables the XSS Protections offered by the user-agent.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.XssProtectionConstants.Block">
+            <summary>
+            Enables XSS protections and instructs the user-agent to block the response in the event that script has been inserted from user input, instead of sanitizing.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.XssProtectionConstants.Report">
+            <summary>
+            A partially supported directive that tells the user-agent to report potential XSS attacks to a single URL. Data will be POST'd to the report URL in JSON format. 
+            {0} specifies the report url, including protocol
+            </summary>
+        </member>
+        <member name="T:Aark.SecurityHeaders.Extension.DefaultMiddleware">
+            <summary>
+            Default middleware for the extensions.
+            </summary>
+        </member>
+        <member name="M:Aark.SecurityHeaders.Extension.DefaultMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="next"></param>
+        </member>
+        <member name="M:Aark.SecurityHeaders.Extension.DefaultMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Invoke.
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Aark.SecurityHeaders.Extension.MiddlewareExtensions">
+            <summary>
+            Middleware extensions.
+            </summary>
+        </member>
+        <member name="M:Aark.SecurityHeaders.Extension.MiddlewareExtensions.UseSecurityHeadersMiddleware(Microsoft.AspNetCore.Builder.IApplicationBuilder,Aark.SecurityHeaders.Extension.SecurityHeadersBuilder)">
+            <summary>
+            Add security headers.
+            </summary>
+            <param name="app"></param>
+            <param name="builder"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Aark.SecurityHeaders.Extension.SecurityHeadersBuilder">
+            <summary>
+            Exposes methods to build a policy.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.SecurityHeadersBuilder.OneYearInSeconds">
+            <summary>
+            The number of seconds in one year
+            </summary>
+        </member>
+        <member name="M:Aark.SecurityHeaders.Extension.SecurityHeadersBuilder.AddDefaultSecurePolicy">
+            <summary>
+            Add default headers in accordance with most secure approach
+            </summary>
+        </member>
+        <member name="M:Aark.SecurityHeaders.Extension.SecurityHeadersBuilder.AddFeaturePolicy(Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.Directive,Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.HttpFeatures,System.Collections.Generic.IList{System.Uri})">
+            <summary>
+            Adds a list of features to which the provided directive is applied.
+            </summary>
+            <param name="directive">Directive to apply.</param>
+            <param name="features">Features.</param>
+            <param name="uriList">List of uri if the directive requires one.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Aark.SecurityHeaders.Extension.SecurityHeadersBuilder.AddFrameOptionsDeny">
+            <summary>
+            Add X-Frame-Options DENY to all requests.
+            The page cannot be displayed in a frame, regardless of the site attempting to do so
+            </summary>
+        </member>
+        <member name="M:Aark.SecurityHeaders.Extension.SecurityHeadersBuilder.AddFrameOptionsSameOrigin">
+            <summary>
+            Add X-Frame-Options SAMEORIGIN to all requests.
+            The page can only be displayed in a frame on the same origin as the page itself.
+            </summary>
+        </member>
+        <member name="M:Aark.SecurityHeaders.Extension.SecurityHeadersBuilder.AddFrameOptionsSameOrigin(System.Uri)">
+            <summary>
+            Add X-Frame-Options ALLOW-FROM {uri} to all requests, where the uri is provided
+            The page can only be displayed in a frame on the specified origin.
+            </summary>
+            <param name="uri">The uri of the origin in which the page may be displayed in a frame</param>
+        </member>
+        <member name="M:Aark.SecurityHeaders.Extension.SecurityHeadersBuilder.AddXssProtectionEnabled">
+            <summary>
+            Add X-XSS-Protection 1 to all requests.
+            Enables the XSS Protections
+            </summary>
+        </member>
+        <member name="M:Aark.SecurityHeaders.Extension.SecurityHeadersBuilder.AddXssProtectionDisabled">
+            <summary>
+            Add X-XSS-Protection 0 to all requests.
+            Disables the XSS Protections offered by the user-agent.
+            </summary>
+        </member>
+        <member name="M:Aark.SecurityHeaders.Extension.SecurityHeadersBuilder.AddXssProtectionBlock">
+            <summary>
+            Add X-XSS-Protection 1; mode=block to all requests.
+            Enables XSS protections and instructs the user-agent to block the response in the event that script has been inserted from user input, instead of sanitizing.
+            </summary>
+        </member>
+        <member name="M:Aark.SecurityHeaders.Extension.SecurityHeadersBuilder.AddXssProtectionReport(System.Uri)">
+            <summary>
+            Add X-XSS-Protection 1; report=http://site.com/report to all requests.
+            A partially supported directive that tells the user-agent to report potential XSS attacks to a single URL. Data will be POST'd to the report URL in JSON format.
+            </summary>
+        </member>
+        <member name="M:Aark.SecurityHeaders.Extension.SecurityHeadersBuilder.AddStrictTransportSecurityMaxAge(System.Int32)">
+            <summary>
+            Add Strict-Transport-Security max-age=<see cref="T:System.Int32"/> to all requests.
+            Tells the user-agent to cache the domain in the STS list for the number of seconds provided.
+            </summary>
+        </member>
+        <member name="M:Aark.SecurityHeaders.Extension.SecurityHeadersBuilder.AddStrictTransportSecurityMaxAgeIncludeSubDomains(System.Int32)">
+            <summary>
+            Add Strict-Transport-Security max-age=<see cref="T:System.Int32"/>; includeSubDomains to all requests.
+            Tells the user-agent to cache the domain in the STS list for the number of seconds provided and include any sub-domains.
+            </summary>
+        </member>
+        <member name="M:Aark.SecurityHeaders.Extension.SecurityHeadersBuilder.AddStrictTransportSecurityNoCache">
+            <summary>
+            Add Strict-Transport-Security max-age=0 to all requests.
+            Tells the user-agent to remove, or not cache the host in the STS cache
+            </summary>
+        </member>
+        <member name="M:Aark.SecurityHeaders.Extension.SecurityHeadersBuilder.AddContentTypeOptionsNoSniff">
+            <summary>
+            Add X-Content-Type-Options nosniff to all requests.
+            Can be set to protect against MIME type confusion attacks.
+            </summary>
+        </member>
+        <member name="M:Aark.SecurityHeaders.Extension.SecurityHeadersBuilder.RemoveServerHeader">
+            <summary>
+            Removes the Server header from all responses
+            </summary>
+        </member>
+        <member name="M:Aark.SecurityHeaders.Extension.SecurityHeadersBuilder.AddCustomHeader(System.String,System.String)">
+            <summary>
+            Adds a custom header to all requests
+            </summary>
+            <param name="header">The header name</param>
+            <param name="value">The value for the header</param>
+            <returns></returns>
+        </member>
+        <member name="M:Aark.SecurityHeaders.Extension.SecurityHeadersBuilder.RemoveHeader(System.String)">
+            <summary>
+            Remove a header from all requests
+            </summary>
+            <param name="header">The to remove</param>
+            <returns></returns>
+        </member>
+        <member name="M:Aark.SecurityHeaders.Extension.SecurityHeadersBuilder.Build">
+            <summary>
+            Builds a new <see cref="T:Aark.SecurityHeaders.Extension.SecurityHeadersPolicy"/> using the entries added.
+            </summary>
+            <returns>The constructed <see cref="T:Aark.SecurityHeaders.Extension.SecurityHeadersPolicy"/>.</returns>
+        </member>
+        <member name="T:Aark.SecurityHeaders.Extension.SecurityHeadersMiddleware">
+            <summary>
+            Security headers middleware for the extensions.
+            </summary>
+        </member>
+        <member name="M:Aark.SecurityHeaders.Extension.SecurityHeadersMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Aark.SecurityHeaders.Extension.SecurityHeadersPolicy)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="next"></param>
+            <param name="policy"></param>
+        </member>
+        <member name="M:Aark.SecurityHeaders.Extension.SecurityHeadersMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Invoke.
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Aark.SecurityHeaders.Extension.SecurityHeadersPolicy">
+            <summary>
+            Security headers policy.
+            </summary>
+        </member>
+    </members>
+</doc>

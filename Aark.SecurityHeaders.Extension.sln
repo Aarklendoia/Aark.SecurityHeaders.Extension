@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aark.SecurityHeaders.Extension", "Aark.SecurityHeaders.Extension\Aark.SecurityHeaders.Extension.csproj", "{56255109-9754-4636-A02E-ABF33FBC3461}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{56255109-9754-4636-A02E-ABF33FBC3461}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56255109-9754-4636-A02E-ABF33FBC3461}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56255109-9754-4636-A02E-ABF33FBC3461}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56255109-9754-4636-A02E-ABF33FBC3461}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4706B761-6BF9-4990-ACDD-77BB238CFCF3}
+	EndGlobalSection
+EndGlobal
