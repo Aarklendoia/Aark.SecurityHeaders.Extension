@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\Users\edoua\source\repos\Aark.SecurityHeaders.Extension\Aark.SecurityHeaders.Extension\Aark.SecurityHeaders.Extension.xml</DocumentationFile>
+    <DocumentationFile>Aark.SecurityHeaders.Extension.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

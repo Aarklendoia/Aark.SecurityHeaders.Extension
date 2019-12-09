@@ -4,6 +4,41 @@
         <name>Aark.SecurityHeaders.Extension</name>
     </assembly>
     <members>
+        <member name="T:Aark.SecurityHeaders.Extension.Constants.CommonPolicyDirective">
+            <summary>
+            Common directives.
+            </summary>
+        </member>
+        <member name="T:Aark.SecurityHeaders.Extension.Constants.CommonPolicyDirective.Directive">
+            <summary>
+            Fetch directives control locations from which certain resource types may be loaded.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.CommonPolicyDirective.Directive.AllowAll">
+            <summary>
+            The feature will be allowed in this document, and all nested browsing contexts(iframes) regardless of their origin.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.CommonPolicyDirective.Directive.AllowSelf">
+            <summary>
+            The feature will be allowed in this document, and in all nested browsing contexts (iframes) in the same origin.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.CommonPolicyDirective.Directive.AllowSrc">
+            <summary>
+            (In an iframe allow attribute only) The feature will be allowed in this iframe, as long as the document loaded into it comes from the same origin as the URL in the iframe's src attribute.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.CommonPolicyDirective.Directive.DenyAll">
+            <summary>
+            The feature is disabled in top-level and nested browsing contexts.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.CommonPolicyDirective.Directive.AllowOrigin">
+            <summary>
+            The feature is allowed for specific origins(for example, https://example.com). Origins should be separated by a space.
+            </summary>
+        </member>
         <member name="T:Aark.SecurityHeaders.Extension.Constants.ContentSecurityPolicyConstants">
             <summary>
             The HTTP Content-Security-Policy response header allows web site administrators to control resources the user agent is allowed to load for a given page. With a few exceptions, policies mostly involve specifying server origins and script endpoints. This helps guard against cross-site scripting attacks (XSS).
@@ -124,36 +159,6 @@
         <member name="T:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants">
             <summary>
             The HTTP Feature-Policy  header provides a mechanism to allow and deny the use of browser features in its own frame, and in content within any iframe elements in the document.
-            </summary>
-        </member>
-        <member name="T:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.Directive">
-            <summary>
-            Fetch directives control locations from which certain resource types may be loaded.
-            </summary>
-        </member>
-        <member name="F:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.Directive.AllowAll">
-            <summary>
-            The feature will be allowed in this document, and all nested browsing contexts(iframes) regardless of their origin.
-            </summary>
-        </member>
-        <member name="F:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.Directive.AllowSelf">
-            <summary>
-            The feature will be allowed in this document, and in all nested browsing contexts (iframes) in the same origin.
-            </summary>
-        </member>
-        <member name="F:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.Directive.AllowSrc">
-            <summary>
-            (In an iframe allow attribute only) The feature will be allowed in this iframe, as long as the document loaded into it comes from the same origin as the URL in the iframe's src attribute.
-            </summary>
-        </member>
-        <member name="F:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.Directive.DenyAll">
-            <summary>
-            The feature is disabled in top-level and nested browsing contexts.
-            </summary>
-        </member>
-        <member name="F:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.Directive.AllowOrigin">
-            <summary>
-            The feature is allowed for specific origins(for example, https://example.com). Origins should be separated by a space.
             </summary>
         </member>
         <member name="F:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.Header">
@@ -496,12 +501,21 @@
             Add default headers in accordance with most secure approach
             </summary>
         </member>
-        <member name="M:Aark.SecurityHeaders.Extension.SecurityHeadersBuilder.AddFeaturePolicy(Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.Directive,Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.HttpFeatures,System.Collections.Generic.IList{System.Uri})">
+        <member name="M:Aark.SecurityHeaders.Extension.SecurityHeadersBuilder.AddFeaturePolicy(Aark.SecurityHeaders.Extension.Constants.CommonPolicyDirective.Directive,Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.HttpFeatures,System.Collections.Generic.IList{System.Uri})">
             <summary>
             Adds a list of features to which the provided directive is applied.
             </summary>
             <param name="directive">Directive to apply.</param>
             <param name="features">Features.</param>
+            <param name="uriList">List of uri if the directive requires one.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Aark.SecurityHeaders.Extension.SecurityHeadersBuilder.AddContentSecurityPolicy(Aark.SecurityHeaders.Extension.Constants.CommonPolicyDirective.Directive,Aark.SecurityHeaders.Extension.Constants.ContentSecurityPolicyConstants.FetchDirectives,System.Collections.Generic.IList{System.Uri})">
+            <summary>
+            Adds a list of content security to which the provided directive is applied.
+            </summary>
+            <param name="directive">Directive to apply.</param>
+            <param name="fetchDirective">Content security fetch directive.</param>
             <param name="uriList">List of uri if the directive requires one.</param>
             <returns></returns>
         </member>

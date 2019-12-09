@@ -11,8 +11,8 @@ namespace Aark.SecurityHeaders.Extension
     public class SecurityHeadersBuilder
     {
         private readonly SecurityHeadersPolicy _policy = new SecurityHeadersPolicy();
-        private readonly Dictionary<FeaturePolicyConstants.HttpFeatures, FeaturePolicyConstants.Directive> _features = new Dictionary<FeaturePolicyConstants.HttpFeatures, FeaturePolicyConstants.Directive>();
-        private readonly Dictionary<ContentSecurityPolicyConstants.FetchDirectives, ContentSecurityPolicyConstants.>
+        private readonly Dictionary<FeaturePolicyConstants.HttpFeatures, CommonPolicyDirective.Directive> _features = new Dictionary<FeaturePolicyConstants.HttpFeatures, CommonPolicyDirective.Directive>();
+        private readonly Dictionary<ContentSecurityPolicyConstants.FetchDirectives, CommonPolicyDirective.Directive> _directives = new Dictionary<ContentSecurityPolicyConstants.FetchDirectives, CommonPolicyDirective.Directive>();
 
         /// <summary>
         /// The number of seconds in one year
@@ -31,12 +31,18 @@ namespace Aark.SecurityHeaders.Extension
             RemoveServerHeader();
             AddReferrerPolicy();
             ClearFeaturePolicy();
+            ClearContentSecurityPolicy();
             return this;
         }
 
         private void ClearFeaturePolicy()
         {
             _features.Clear();
+        }
+
+        private void ClearContentSecurityPolicy()
+        {
+            _directives.Clear();
         }
 
         /// <summary>
@@ -46,7 +52,7 @@ namespace Aark.SecurityHeaders.Extension
         /// <param name="features">Features.</param>
         /// <param name="uriList">List of uri if the directive requires one.</param>
         /// <returns></returns>
-        public SecurityHeadersBuilder AddFeaturePolicy(FeaturePolicyConstants.Directive directive, FeaturePolicyConstants.HttpFeatures features, IList<Uri> uriList = null)
+        public SecurityHeadersBuilder AddFeaturePolicy(CommonPolicyDirective.Directive directive, FeaturePolicyConstants.HttpFeatures features, IList<Uri> uriList = null)
         {
             if (features.HasFlag(FeaturePolicyConstants.HttpFeatures.Accelerometer))
                 _features.TryAdd(FeaturePolicyConstants.HttpFeatures.Accelerometer, directive);
@@ -103,12 +109,49 @@ namespace Aark.SecurityHeaders.Extension
         private string FeaturesToString(IList<Uri> uriList = null)
         {
             string value = null;
-            foreach (KeyValuePair<FeaturePolicyConstants.HttpFeatures, FeaturePolicyConstants.Directive> feature in _features)
+            foreach (KeyValuePair<FeaturePolicyConstants.HttpFeatures, CommonPolicyDirective.Directive> feature in _features)
             {
                 if (value == null)
                     value = string.Format(CultureInfo.InvariantCulture, feature.Value.ToFormatedString(), feature.Key.ToFormatedString());
                 else
                     value += "; " + string.Format(CultureInfo.InvariantCulture, feature.Value.ToFormatedString(), feature.Key.ToFormatedString());
+            }
+            if (uriList != null)
+            {
+                string urls = string.Empty;
+                foreach (Uri url in uriList)
+                {
+                    urls += " " + url.AbsoluteUri;
+                }
+                return value + urls;
+            }
+            return value;
+        }
+
+        /// <summary>
+        /// Adds a list of content security to which the provided directive is applied.
+        /// </summary>
+        /// <param name="directive">Directive to apply.</param>
+        /// <param name="fetchDirective">Content security fetch directive.</param>
+        /// <param name="uriList">List of uri if the directive requires one.</param>
+        /// <returns></returns>
+        public SecurityHeadersBuilder AddContentSecurityPolicy(CommonPolicyDirective.Directive directive, ContentSecurityPolicyConstants.FetchDirectives fetchDirective, IList<Uri> uriList = null)
+        {
+            if (fetchDirective.HasFlag(ContentSecurityPolicyConstants.FetchDirectives.ChildSrc))
+                _directives.TryAdd(ContentSecurityPolicyConstants.FetchDirectives.ChildSrc, directive);
+            _policy.SetHeaders[FeaturePolicyConstants.Header] = ContentSecurityToString(uriList);
+            return this;
+        }
+
+        private string ContentSecurityToString(IList<Uri> uriList = null)
+        {
+            string value = null;
+            foreach (KeyValuePair<ContentSecurityPolicyConstants.FetchDirectives, CommonPolicyDirective.Directive> directive in _directives)
+            {
+                if (value == null)
+                    value = string.Format(CultureInfo.InvariantCulture, directive.Value.ToFormatedString(), directive.Key.ToFormatedString());
+                else
+                    value += "; " + string.Format(CultureInfo.InvariantCulture, directive.Value.ToFormatedString(), directive.Key.ToFormatedString());
             }
             if (uriList != null)
             {
