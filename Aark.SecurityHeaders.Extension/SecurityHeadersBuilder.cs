@@ -10,6 +10,8 @@ namespace Aark.SecurityHeaders.Extension
     /// </summary>
     public class SecurityHeadersBuilder
     {
+        private Uri _reportUri = null;
+
         private readonly SecurityHeadersPolicy _policy = new SecurityHeadersPolicy();
         private readonly Dictionary<FeaturePolicyConstants.HttpFeatures, CommonPolicyDirective.Directive> _features = new Dictionary<FeaturePolicyConstants.HttpFeatures, CommonPolicyDirective.Directive>();
         private readonly Dictionary<ContentSecurityPolicyConstants.FetchDirectives, CommonPolicyDirective.Directive> _directives = new Dictionary<ContentSecurityPolicyConstants.FetchDirectives, CommonPolicyDirective.Directive>();
@@ -35,14 +37,27 @@ namespace Aark.SecurityHeaders.Extension
             return this;
         }
 
-        private void ClearFeaturePolicy()
+        private SecurityHeadersBuilder ClearFeaturePolicy()
         {
             _features.Clear();
+            return this;
         }
 
-        private void ClearContentSecurityPolicy()
+        private SecurityHeadersBuilder ClearContentSecurityPolicy()
         {
             _directives.Clear();
+            return this;
+        }
+
+        /// <summary>
+        /// Add a report uri.
+        /// </summary>
+        /// <param name="reportUri">Uri where to report rule violations.</param>
+        /// <returns></returns>
+        public SecurityHeadersBuilder AddReportUri(Uri reportUri)
+        {
+            _reportUri = reportUri;
+            return this;
         }
 
         /// <summary>
@@ -50,9 +65,9 @@ namespace Aark.SecurityHeaders.Extension
         /// </summary>
         /// <param name="directive">Directive to apply.</param>
         /// <param name="features">Features.</param>
-        /// <param name="uriList">List of uri if the directive requires one.</param>
+        /// <param name="hostSources">List of source uri if the directive requires one.</param>
         /// <returns></returns>
-        public SecurityHeadersBuilder AddFeaturePolicy(CommonPolicyDirective.Directive directive, FeaturePolicyConstants.HttpFeatures features, IList<Uri> uriList = null)
+        public SecurityHeadersBuilder AddFeaturePolicy(CommonPolicyDirective.Directive directive, FeaturePolicyConstants.HttpFeatures features, IList<Uri> hostSources = null)
         {
             if (features.HasFlag(FeaturePolicyConstants.HttpFeatures.Accelerometer))
                 _features.TryAdd(FeaturePolicyConstants.HttpFeatures.Accelerometer, directive);
@@ -102,11 +117,11 @@ namespace Aark.SecurityHeaders.Extension
                 _features.TryAdd(FeaturePolicyConstants.HttpFeatures.WakeLock, directive);
             if (features.HasFlag(FeaturePolicyConstants.HttpFeatures.XrSpatialTracking))
                 _features.TryAdd(FeaturePolicyConstants.HttpFeatures.XrSpatialTracking, directive);
-            _policy.SetHeaders[FeaturePolicyConstants.Header] = FeaturesToString(uriList);
+            _policy.SetHeaders[FeaturePolicyConstants.Header] = FeaturesToString(hostSources);
             return this;
         }
 
-        private string FeaturesToString(IList<Uri> uriList = null)
+        private string FeaturesToString(IList<Uri> hostSources = null)
         {
             string value = null;
             foreach (KeyValuePair<FeaturePolicyConstants.HttpFeatures, CommonPolicyDirective.Directive> feature in _features)
@@ -116,10 +131,10 @@ namespace Aark.SecurityHeaders.Extension
                 else
                     value += "; " + string.Format(CultureInfo.InvariantCulture, feature.Value.ToFormatedString(), feature.Key.ToFormatedString());
             }
-            if (uriList != null)
+            if (hostSources != null)
             {
                 string urls = string.Empty;
-                foreach (Uri url in uriList)
+                foreach (Uri url in hostSources)
                 {
                     urls += " " + url.AbsoluteUri;
                 }
@@ -133,10 +148,10 @@ namespace Aark.SecurityHeaders.Extension
         /// </summary>
         /// <param name="directive">Directive to apply.</param>
         /// <param name="fetchDirective">Content security fetch directive.</param>
-        /// <param name="uriList">List of uri if the directive requires one.</param>
-        /// <param name="reportUri">Uri to report violation of the rule.</param>
+        /// <param name="hostSources">List of uri if the directive requires one.</param>
+        /// <param name="schemeSources">List of scheme source authorized.</param>
         /// <returns></returns>
-        public SecurityHeadersBuilder AddContentSecurityPolicy(CommonPolicyDirective.Directive directive, ContentSecurityPolicyConstants.FetchDirectives fetchDirective, IList<Uri> uriList = null, Uri reportUri = null)
+        public SecurityHeadersBuilder AddContentSecurityPolicy(CommonPolicyDirective.Directive directive, ContentSecurityPolicyConstants.FetchDirectives fetchDirective, CommonPolicySchemeSource.SchemeSources schemeSources, IList<Uri> hostSources = null)
         {
             if (fetchDirective.HasFlag(ContentSecurityPolicyConstants.FetchDirectives.ChildSrc))
                 _directives.TryAdd(ContentSecurityPolicyConstants.FetchDirectives.ChildSrc, directive);
@@ -166,16 +181,17 @@ namespace Aark.SecurityHeaders.Extension
                 _directives.TryAdd(ContentSecurityPolicyConstants.FetchDirectives.ScriptSrcElem, directive);
             if (fetchDirective.HasFlag(ContentSecurityPolicyConstants.FetchDirectives.WorkerSrc))
                 _directives.TryAdd(ContentSecurityPolicyConstants.FetchDirectives.WorkerSrc, directive);
-            string header = ContentSecurityToString(uriList);
-            if (reportUri != null)
+            string header = ContentSecurityToString(hostSources);
+            header += SchemeSourceToString(schemeSources);
+            if (_reportUri != null)
             {
-                header += "; " + CommonPolicyDirective.ReportUri + " " + reportUri.AbsoluteUri;
+                header += "; " + CommonPolicyDirective.ReportUri + " " + _reportUri.AbsoluteUri;
             }
             _policy.SetHeaders[ContentSecurityPolicyConstants.Header] = header;
             return this;
         }
 
-        private string ContentSecurityToString(IList<Uri> uriList = null)
+        private string ContentSecurityToString(IList<Uri> hostSources = null)
         {
             string value = null;
             foreach (KeyValuePair<ContentSecurityPolicyConstants.FetchDirectives, CommonPolicyDirective.Directive> directive in _directives)
@@ -185,14 +201,35 @@ namespace Aark.SecurityHeaders.Extension
                 else
                     value += "; " + string.Format(CultureInfo.InvariantCulture, directive.Value.ToFormatedString(), directive.Key.ToFormatedString());
             }
-            if (uriList != null)
+            if (hostSources != null)
             {
                 string urls = string.Empty;
-                foreach (Uri url in uriList)
+                foreach (Uri url in hostSources)
                 {
                     urls += " " + url.AbsoluteUri;
                 }
                 return value + urls;
+            }
+            return value;
+        }
+
+        private static string SchemeSourceToString(CommonPolicySchemeSource.SchemeSources schemeSources)
+        {
+            if (schemeSources.HasFlag(CommonPolicySchemeSource.SchemeSources.None))
+                return null;
+            List<CommonPolicySchemeSource.SchemeSources> schemeSourceList = new List<CommonPolicySchemeSource.SchemeSources>();
+            if (schemeSources.HasFlag(CommonPolicySchemeSource.SchemeSources.Blob))
+                schemeSourceList.Add(CommonPolicySchemeSource.SchemeSources.Blob);
+            if (schemeSources.HasFlag(CommonPolicySchemeSource.SchemeSources.Data))
+                schemeSourceList.Add(CommonPolicySchemeSource.SchemeSources.Data);
+            if (schemeSources.HasFlag(CommonPolicySchemeSource.SchemeSources.FileSystem))
+                schemeSourceList.Add(CommonPolicySchemeSource.SchemeSources.FileSystem);
+            if (schemeSources.HasFlag(CommonPolicySchemeSource.SchemeSources.MediaStream))
+                schemeSourceList.Add(CommonPolicySchemeSource.SchemeSources.MediaStream);
+            string value = null;
+            foreach (CommonPolicySchemeSource.SchemeSources schemeSource in schemeSourceList)
+            {
+                value += " " + schemeSource.ToFormatedString();
             }
             return value;
         }

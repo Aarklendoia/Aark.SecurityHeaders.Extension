@@ -39,6 +39,41 @@
             The feature is allowed for specific origins(for example, https://example.com). Origins should be separated by a space.
             </summary>
         </member>
+        <member name="T:Aark.SecurityHeaders.Extension.Constants.CommonPolicySchemeSource">
+            <summary>
+            Common scheme source.
+            </summary>
+        </member>
+        <member name="T:Aark.SecurityHeaders.Extension.Constants.CommonPolicySchemeSource.SchemeSources">
+            <summary>
+            A schema such as 'http:' or 'https:'.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.CommonPolicySchemeSource.SchemeSources.None">
+            <summary>
+            No scheme define.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.CommonPolicySchemeSource.SchemeSources.Data">
+            <summary>
+             Allows data: URIs to be used as a content source. This is insecure; an attacker can also inject arbitrary data: URIs. Use this sparingly and definitely not for scripts.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.CommonPolicySchemeSource.SchemeSources.MediaStream">
+            <summary>
+             Allows mediastream: URIs to be used as a content source.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.CommonPolicySchemeSource.SchemeSources.Blob">
+            <summary>
+            blob: Allows blob: URIs to be used as a content source.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.CommonPolicySchemeSource.SchemeSources.FileSystem">
+            <summary>
+            Allows filesystem: URIs to be used as a content source.
+            </summary>
+        </member>
         <member name="T:Aark.SecurityHeaders.Extension.Constants.ContentSecurityPolicyConstants">
             <summary>
             The HTTP Content-Security-Policy response header allows web site administrators to control resources the user agent is allowed to load for a given page. With a few exceptions, policies mostly involve specifying server origins and script endpoints. This helps guard against cross-site scripting attacks (XSS).
@@ -501,23 +536,30 @@
             Add default headers in accordance with most secure approach
             </summary>
         </member>
+        <member name="M:Aark.SecurityHeaders.Extension.SecurityHeadersBuilder.AddReportUri(System.Uri)">
+            <summary>
+            Add a report uri.
+            </summary>
+            <param name="reportUri">Uri where to report rule violations.</param>
+            <returns></returns>
+        </member>
         <member name="M:Aark.SecurityHeaders.Extension.SecurityHeadersBuilder.AddFeaturePolicy(Aark.SecurityHeaders.Extension.Constants.CommonPolicyDirective.Directive,Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants.HttpFeatures,System.Collections.Generic.IList{System.Uri})">
             <summary>
             Adds a list of features to which the provided directive is applied.
             </summary>
             <param name="directive">Directive to apply.</param>
             <param name="features">Features.</param>
-            <param name="uriList">List of uri if the directive requires one.</param>
+            <param name="hostSources">List of source uri if the directive requires one.</param>
             <returns></returns>
         </member>
-        <member name="M:Aark.SecurityHeaders.Extension.SecurityHeadersBuilder.AddContentSecurityPolicy(Aark.SecurityHeaders.Extension.Constants.CommonPolicyDirective.Directive,Aark.SecurityHeaders.Extension.Constants.ContentSecurityPolicyConstants.FetchDirectives,System.Collections.Generic.IList{System.Uri},System.Uri)">
+        <member name="M:Aark.SecurityHeaders.Extension.SecurityHeadersBuilder.AddContentSecurityPolicy(Aark.SecurityHeaders.Extension.Constants.CommonPolicyDirective.Directive,Aark.SecurityHeaders.Extension.Constants.ContentSecurityPolicyConstants.FetchDirectives,Aark.SecurityHeaders.Extension.Constants.CommonPolicySchemeSource.SchemeSources,System.Collections.Generic.IList{System.Uri})">
             <summary>
             Adds a list of content security to which the provided directive is applied.
             </summary>
             <param name="directive">Directive to apply.</param>
             <param name="fetchDirective">Content security fetch directive.</param>
-            <param name="uriList">List of uri if the directive requires one.</param>
-            <param name="reportUri">Uri to report violation of the rule.</param>
+            <param name="hostSources">List of uri if the directive requires one.</param>
+            <param name="schemeSources">List of scheme source authorized.</param>
             <returns></returns>
         </member>
         <member name="M:Aark.SecurityHeaders.Extension.SecurityHeadersBuilder.AddFrameOptionsDeny">
