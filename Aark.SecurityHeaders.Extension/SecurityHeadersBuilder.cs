@@ -184,9 +184,7 @@ namespace Aark.SecurityHeaders.Extension
             string header = ContentSecurityToString(hostSources);
             header += SchemeSourceToString(schemeSources);
             if (_reportUri != null)
-            {
                 header += "; " + CommonPolicyDirective.ReportUri + " " + _reportUri.AbsoluteUri;
-            }
             _policy.SetHeaders[ContentSecurityPolicyConstants.Header] = header;
             return this;
         }
@@ -232,6 +230,22 @@ namespace Aark.SecurityHeaders.Extension
                 value += " " + schemeSource.ToFormatedString();
             }
             return value;
+        }
+
+        /// <summary>
+        /// The Expect-CT header allows sites to opt in to reporting and/or enforcement of Certificate Transparency requirements, which prevents the use of misissued certificates for that site from going unnoticed.
+        /// </summary>
+        /// <returns></returns>
+        public SecurityHeadersBuilder AddExpectCT(int maxAge, bool enforce = false)
+        {
+            string header = null;
+            header += ExceptCTConstants.MaxAge + maxAge;
+            if (enforce)
+                header += ", " + ExceptCTConstants.Enforce;
+            if (_reportUri != null)
+                header += ", " + CommonPolicyDirective.ReportUri + "=\"" + _reportUri.AbsoluteUri + "\"";
+            _policy.SetHeaders[ExceptCTConstants.Header] = header;
+            return this;
         }
 
         private SecurityHeadersBuilder AddReferrerPolicy()

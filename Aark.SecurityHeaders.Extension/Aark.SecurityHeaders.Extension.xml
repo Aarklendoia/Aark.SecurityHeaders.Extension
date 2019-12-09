@@ -191,6 +191,23 @@
             Disables content sniffing
             </summary>
         </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.ExceptCTConstants.Header">
+            <summary>
+            Header value for Expect-CT.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.ExceptCTConstants.MaxAge">
+            <summary>
+            Specifies the number of seconds after reception of the Expect-CT header field during which the user agent should regard the host from whom the message was received as a known Expect-CT host.
+            If a cache receives a value greater than it can represent, or if any of its subsequent calculations overflows, the cache will consider the value to be either 2147483648 (2^31) or the greatest positive integer it can conveniently represent.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.ExceptCTConstants.Enforce">
+            <summary>
+            Signals to the user agent that compliance with the Certificate Transparency policy should be enforced (rather than only reporting compliance) and that the user agent should refuse future connections that violate its Certificate Transparency policy.
+            When both the enforce directive and the report-uri directive are present, the configuration is referred to as an "enforce-and-report" configuration, signalling to the user agent both that compliance to the Certificate Transparency policy should be enforced and that violations should be reported.
+            </summary>
+        </member>
         <member name="T:Aark.SecurityHeaders.Extension.Constants.FeaturePolicyConstants">
             <summary>
             The HTTP Feature-Policy  header provides a mechanism to allow and deny the use of browser features in its own frame, and in content within any iframe elements in the document.
@@ -560,6 +577,12 @@
             <param name="fetchDirective">Content security fetch directive.</param>
             <param name="hostSources">List of uri if the directive requires one.</param>
             <param name="schemeSources">List of scheme source authorized.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Aark.SecurityHeaders.Extension.SecurityHeadersBuilder.AddExpectCT(System.Int32,System.Boolean)">
+            <summary>
+            The Expect-CT header allows sites to opt in to reporting and/or enforcement of Certificate Transparency requirements, which prevents the use of misissued certificates for that site from going unnoticed.
+            </summary>
             <returns></returns>
         </member>
         <member name="M:Aark.SecurityHeaders.Extension.SecurityHeadersBuilder.AddFrameOptionsDeny">
