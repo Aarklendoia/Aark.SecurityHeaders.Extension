@@ -510,13 +510,14 @@
             <param name="uriList">List of uri if the directive requires one.</param>
             <returns></returns>
         </member>
-        <member name="M:Aark.SecurityHeaders.Extension.SecurityHeadersBuilder.AddContentSecurityPolicy(Aark.SecurityHeaders.Extension.Constants.CommonPolicyDirective.Directive,Aark.SecurityHeaders.Extension.Constants.ContentSecurityPolicyConstants.FetchDirectives,System.Collections.Generic.IList{System.Uri})">
+        <member name="M:Aark.SecurityHeaders.Extension.SecurityHeadersBuilder.AddContentSecurityPolicy(Aark.SecurityHeaders.Extension.Constants.CommonPolicyDirective.Directive,Aark.SecurityHeaders.Extension.Constants.ContentSecurityPolicyConstants.FetchDirectives,System.Collections.Generic.IList{System.Uri},System.Uri)">
             <summary>
             Adds a list of content security to which the provided directive is applied.
             </summary>
             <param name="directive">Directive to apply.</param>
             <param name="fetchDirective">Content security fetch directive.</param>
             <param name="uriList">List of uri if the directive requires one.</param>
+            <param name="reportUri">Uri to report violation of the rule.</param>
             <returns></returns>
         </member>
         <member name="M:Aark.SecurityHeaders.Extension.SecurityHeadersBuilder.AddFrameOptionsDeny">

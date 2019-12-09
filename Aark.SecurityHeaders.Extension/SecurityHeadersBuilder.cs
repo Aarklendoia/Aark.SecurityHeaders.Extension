@@ -134,12 +134,44 @@ namespace Aark.SecurityHeaders.Extension
         /// <param name="directive">Directive to apply.</param>
         /// <param name="fetchDirective">Content security fetch directive.</param>
         /// <param name="uriList">List of uri if the directive requires one.</param>
+        /// <param name="reportUri">Uri to report violation of the rule.</param>
         /// <returns></returns>
-        public SecurityHeadersBuilder AddContentSecurityPolicy(CommonPolicyDirective.Directive directive, ContentSecurityPolicyConstants.FetchDirectives fetchDirective, IList<Uri> uriList = null)
+        public SecurityHeadersBuilder AddContentSecurityPolicy(CommonPolicyDirective.Directive directive, ContentSecurityPolicyConstants.FetchDirectives fetchDirective, IList<Uri> uriList = null, Uri reportUri = null)
         {
             if (fetchDirective.HasFlag(ContentSecurityPolicyConstants.FetchDirectives.ChildSrc))
                 _directives.TryAdd(ContentSecurityPolicyConstants.FetchDirectives.ChildSrc, directive);
-            _policy.SetHeaders[FeaturePolicyConstants.Header] = ContentSecurityToString(uriList);
+            if (fetchDirective.HasFlag(ContentSecurityPolicyConstants.FetchDirectives.ConnectSrc))
+                _directives.TryAdd(ContentSecurityPolicyConstants.FetchDirectives.ConnectSrc, directive);
+            if (fetchDirective.HasFlag(ContentSecurityPolicyConstants.FetchDirectives.DefaultSrc))
+                _directives.TryAdd(ContentSecurityPolicyConstants.FetchDirectives.DefaultSrc, directive);
+            if (fetchDirective.HasFlag(ContentSecurityPolicyConstants.FetchDirectives.FontSrc))
+                _directives.TryAdd(ContentSecurityPolicyConstants.FetchDirectives.FontSrc, directive);
+            if (fetchDirective.HasFlag(ContentSecurityPolicyConstants.FetchDirectives.FrameSrc))
+                _directives.TryAdd(ContentSecurityPolicyConstants.FetchDirectives.FrameSrc, directive);
+            if (fetchDirective.HasFlag(ContentSecurityPolicyConstants.FetchDirectives.ImgSrc))
+                _directives.TryAdd(ContentSecurityPolicyConstants.FetchDirectives.ImgSrc, directive);
+            if (fetchDirective.HasFlag(ContentSecurityPolicyConstants.FetchDirectives.ManifestSrc))
+                _directives.TryAdd(ContentSecurityPolicyConstants.FetchDirectives.ManifestSrc, directive);
+            if (fetchDirective.HasFlag(ContentSecurityPolicyConstants.FetchDirectives.MediaSrc))
+                _directives.TryAdd(ContentSecurityPolicyConstants.FetchDirectives.MediaSrc, directive);
+            if (fetchDirective.HasFlag(ContentSecurityPolicyConstants.FetchDirectives.ObjectSrc))
+                _directives.TryAdd(ContentSecurityPolicyConstants.FetchDirectives.ObjectSrc, directive);
+            if (fetchDirective.HasFlag(ContentSecurityPolicyConstants.FetchDirectives.PrefetchSrc))
+                _directives.TryAdd(ContentSecurityPolicyConstants.FetchDirectives.PrefetchSrc, directive);
+            if (fetchDirective.HasFlag(ContentSecurityPolicyConstants.FetchDirectives.ScriptSrc))
+                _directives.TryAdd(ContentSecurityPolicyConstants.FetchDirectives.ScriptSrc, directive);
+            if (fetchDirective.HasFlag(ContentSecurityPolicyConstants.FetchDirectives.ScriptSrcAttr))
+                _directives.TryAdd(ContentSecurityPolicyConstants.FetchDirectives.ScriptSrcAttr, directive);
+            if (fetchDirective.HasFlag(ContentSecurityPolicyConstants.FetchDirectives.ScriptSrcElem))
+                _directives.TryAdd(ContentSecurityPolicyConstants.FetchDirectives.ScriptSrcElem, directive);
+            if (fetchDirective.HasFlag(ContentSecurityPolicyConstants.FetchDirectives.WorkerSrc))
+                _directives.TryAdd(ContentSecurityPolicyConstants.FetchDirectives.WorkerSrc, directive);
+            string header = ContentSecurityToString(uriList);
+            if (reportUri != null)
+            {
+                header += "; " + CommonPolicyDirective.ReportUri + " " + reportUri.AbsoluteUri;
+            }
+            _policy.SetHeaders[ContentSecurityPolicyConstants.Header] = header;
             return this;
         }
 

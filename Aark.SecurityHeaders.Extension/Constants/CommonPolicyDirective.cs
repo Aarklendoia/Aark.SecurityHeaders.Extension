@@ -35,6 +35,8 @@ namespace Aark.SecurityHeaders.Extension.Constants
             /// </summary>
             AllowOrigin
         }
+
+        internal const string ReportUri = "report-uri";
     }
 
     internal static class DirectiveHelper
