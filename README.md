@@ -15,19 +15,19 @@ using Aark.SecurityHeaders.Extension.Constants;
 
 In the configure method, call the extension :
 ```csharp
-            List<Uri> uriList = new List<Uri>
-            {
-                new Uri("https://analytics.example.com"),
-                new Uri("https://*.gstatics.com")
-            };
+List<Uri> hostSources = new List<Uri>
+{
+    new Uri("https://analytics.example.com"),
+    new Uri("https://*.gstatics.com")
+};
 
-            app.UseSecurityHeadersMiddleware(new SecurityHeadersBuilder()
-                .AddDefaultSecurePolicy()
-                .AddReportUri(new Uri("https://report.example.com/report-uri.php"))
-                .AddFeaturePolicy(CommonPolicyDirective.Directive.AllowSelf, FeaturePolicyConstants.HttpFeatures.Geolocation, uriList)
-                .AddContentSecurityPolicy(CommonPolicyDirective.Directive.AllowSelf, ContentSecurityPolicyConstants.FetchDirectives.DefaultSrc, CommonPolicySchemeSource.SchemeSources.None, uriList)
-                .AddContentSecurityPolicy(CommonPolicyDirective.Directive.AllowSelf, ContentSecurityPolicyConstants.FetchDirectives.ImgSrc, CommonPolicySchemeSource.SchemeSources.Data)
-                .AddExpectCT(86400));
+app.UseSecurityHeadersMiddleware(new SecurityHeadersBuilder()
+    .AddDefaultSecurePolicy()
+    .AddReportUri(new Uri("https://report.example.com/report-uri.php"))
+    .AddFeaturePolicy(CommonPolicyDirective.Directive.AllowSelf, FeaturePolicyConstants.HttpFeatures.Geolocation, hostSources)
+    .AddContentSecurityPolicy(CommonPolicyDirective.Directive.AllowSelf, ContentSecurityPolicyConstants.FetchDirectives.DefaultSrc, CommonPolicySchemeSource.SchemeSources.None, hostSources)
+    .AddContentSecurityPolicy(CommonPolicyDirective.Directive.AllowSelf, ContentSecurityPolicyConstants.FetchDirectives.ImgSrc, CommonPolicySchemeSource.SchemeSources.Data)
+    .AddExpectCT(86400));
 ```
 
 You can call AddDefaultSecurePolicy() to set default value for Frame-Options, Xss-Protection, Content-Type-Options, Strict-Transport-Security and Referrer-Policy. After this call, all Feature-Policy and Content-Security-Policy are cleared.
@@ -36,9 +36,8 @@ Call AddReportUri to add for each policy supported an uri to report rule violati
 
 You can add manually a header by calling AddCustomHeader :
 ```csharp
-            app.UseSecurityHeadersMiddleware(new SecurityHeadersBuilder()
-                .AddCustomHeader("My header", "Hello !")
-
+app.UseSecurityHeadersMiddleware(new SecurityHeadersBuilder()
+    .AddCustomHeader("My header", "Hello !")
 ```
 
 ## Authors
