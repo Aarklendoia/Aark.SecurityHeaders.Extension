@@ -12,6 +12,7 @@ namespace Aark.SecurityHeaders.Extension
     {
         private readonly SecurityHeadersPolicy _policy = new SecurityHeadersPolicy();
         private readonly Dictionary<FeaturePolicyConstants.HttpFeatures, FeaturePolicyConstants.Directive> _features = new Dictionary<FeaturePolicyConstants.HttpFeatures, FeaturePolicyConstants.Directive>();
+        private readonly Dictionary<ContentSecurityPolicyConstants.FetchDirectives, ContentSecurityPolicyConstants.>
 
         /// <summary>
         /// The number of seconds in one year

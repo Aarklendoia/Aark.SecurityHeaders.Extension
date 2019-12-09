@@ -84,4 +84,51 @@ namespace Aark.SecurityHeaders.Extension.Constants
             WorkerSrc = 65536
         }
     }
+
+    internal static class FetchDirectivesHelper
+    {
+        internal const string ChildSrc = "child-src";
+        internal const string ConnectSrc = "connect-src";
+        internal const string DefaultSrc = "default-src";
+        internal const string FontSrc = "font-src";
+        internal const string FrameSrc = "frame-src";
+        internal const string ImgSrc = "img-src";
+        internal const string ManifestSrc = "manifest-src";
+        internal const string MediaSrc = "media-src";
+        internal const string ObjectSrc = "object-src";
+        internal const string PrefetchSrc = "prefetch-src";
+        internal const string ScriptSrc = "script-src";
+        internal const string ScriptSrcElem = "script-src-elem";
+        internal const string ScriptSrcAttr = "script-src-attr";
+        internal const string StyleSrc = "style-src";
+        internal const string StyleSrcElem = "style-src-elem";
+        internal const string StyleSrcAttr = "style-src-attr";
+        internal const string WorkerSrc = "worker-src";
+
+
+        public static string ToFormatedString(this ContentSecurityPolicyConstants.FetchDirectives directive)
+        {
+            return directive switch
+            {
+                ContentSecurityPolicyConstants.FetchDirectives.ChildSrc => ChildSrc,
+                ContentSecurityPolicyConstants.FetchDirectives.ConnectSrc => ConnectSrc,
+                ContentSecurityPolicyConstants.FetchDirectives.DefaultSrc => DefaultSrc,
+                ContentSecurityPolicyConstants.FetchDirectives.FontSrc => FontSrc,
+                ContentSecurityPolicyConstants.FetchDirectives.FrameSrc => FrameSrc,
+                ContentSecurityPolicyConstants.FetchDirectives.ImgSrc => ImgSrc,
+                ContentSecurityPolicyConstants.FetchDirectives.ManifestSrc => ManifestSrc,
+                ContentSecurityPolicyConstants.FetchDirectives.MediaSrc => MediaSrc,
+                ContentSecurityPolicyConstants.FetchDirectives.ObjectSrc => ObjectSrc,
+                ContentSecurityPolicyConstants.FetchDirectives.PrefetchSrc => PrefetchSrc,
+                ContentSecurityPolicyConstants.FetchDirectives.ScriptSrc => ScriptSrc,
+                ContentSecurityPolicyConstants.FetchDirectives.ScriptSrcElem => ScriptSrcElem,
+                ContentSecurityPolicyConstants.FetchDirectives.ScriptSrcAttr => ScriptSrcAttr,
+                ContentSecurityPolicyConstants.FetchDirectives.StyleSrc => StyleSrc,
+                ContentSecurityPolicyConstants.FetchDirectives.StyleSrcElem => StyleSrcElem,
+                ContentSecurityPolicyConstants.FetchDirectives.StyleSrcAttr => StyleSrcAttr,
+                ContentSecurityPolicyConstants.FetchDirectives.WorkerSrc => WorkerSrc,
+                _ => DefaultSrc
+            };
+        }
+    }
 }

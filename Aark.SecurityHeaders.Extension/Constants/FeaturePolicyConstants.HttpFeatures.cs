@@ -125,7 +125,7 @@ namespace Aark.SecurityHeaders.Extension.Constants
         }
     }
 
-    internal static class FeatureHelper
+    internal static class HttpFeaturesHelper
     {
         internal const string Accelerometer = "accelerometer";
         internal const string AmbientLightSensor = "ambient-light-sensor";
