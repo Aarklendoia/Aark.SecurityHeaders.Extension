@@ -37,7 +37,7 @@ Call AddReportUri to add for each policy supported an uri to report rule violati
 You can add manually a header by calling AddCustomHeader :
 ```csharp
 app.UseSecurityHeadersMiddleware(new SecurityHeadersBuilder()
-    .AddCustomHeader("My header", "Hello !")
+    .AddCustomHeader("My header", "Hello !"));
 ```
 
 ## Authors
