@@ -4,7 +4,7 @@ This is an extension (middleware) to add HTTP security headers in a WebAPI in .N
 
 # How to use
 
-Install the [nuget package](https://www.nuget.org/packages/Aark.Netatmo.Extension/).
+Install the [nuget package](https://www.nuget.org/packages/Aark.SecurityHeaders.Extension/).
 
 Add the extention namespaces in your startup.cs file :
 
