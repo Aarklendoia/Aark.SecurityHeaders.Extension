@@ -16,7 +16,7 @@ jobs:
     - name: Setup Nuget
       uses: warrenbuckley/Setup-Nuget@v1
     - name: Add GPR Source using nuget.exe
-      run: nuget source Add -Name "GitHub" -Source "https://nuget.pkg.github.com/Aarklendoia/index.json" -UserName Aarklendoia -Password GH_TOKEN
+      run: nuget source Add -Name "GitHub" -Source "https://nuget.pkg.github.com/Aarklendoia/index.json" -UserName Aarklendoia -Password ${{ secrets.GHPackagesToken }}
     - name: Build with dotnet
       run: dotnet build --configuration Release
     - name: nuget push
