@@ -1,11 +1,11 @@
-name: .NET Core
+name: Generate Nuget package
 
 on: [push]
 
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v1
@@ -13,14 +13,11 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.100
-    - name: Build with dotnet and create prerelease nupkg
+    - name: Setup Nuget
+      uses: warrenbuckley/Setup-Nuget@v1
+    - name: Add GPR Source using nuget.exe
+      run: nuget source Add -Name "GitHub" -Source "https://nuget.pkg.github.com/Aarklendoia/index.json" -UserName Aarklendoia -Password GH_TOKEN
+    - name: Build with dotnet
       run: dotnet build --configuration Release
-      shell: bash
-    - name: Publish nuget to GitHub Packages
-      run: |
-           for f in ./Aark.SecurityHeaders.Extension/bin/Release/*.nupkg
-           do
-             curl -vX PUT -u "Aarklendoia:${{ secrets.GHPackagesToken }}" -F package=@$f https://nuget.pkg.github.com/Aarklendoia/
-           done
-      shell: bash
-      
+    - name: nuget push
+      run: nuget push Aark.SecurityHeaders.Extension\**\*.nupkg -source "GitHub" -SkipDuplicate
