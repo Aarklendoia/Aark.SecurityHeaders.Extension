@@ -81,7 +81,12 @@
         </member>
         <member name="F:Aark.SecurityHeaders.Extension.Constants.ContentSecurityPolicyConstants.Header">
             <summary>
-            Header value for Content-Security-Policy
+            Header value for Content-Security-Policy.
+            </summary>
+        </member>
+        <member name="F:Aark.SecurityHeaders.Extension.Constants.ContentSecurityPolicyConstants.HeaderReportOnly">
+            <summary>
+            Header value for Content-Security-Policy-Report-Only.
             </summary>
         </member>
         <member name="T:Aark.SecurityHeaders.Extension.Constants.ContentSecurityPolicyConstants.FetchDirectives">
@@ -525,6 +530,36 @@
             <param name="context"></param>
             <returns></returns>
         </member>
+        <member name="T:Aark.SecurityHeaders.Extension.Exceptions.ReportUriMissingException">
+            <summary>
+            Occurs when the report uri is mandatory but not available.
+            </summary>
+        </member>
+        <member name="M:Aark.SecurityHeaders.Extension.Exceptions.ReportUriMissingException.#ctor">
+            <summary>
+            Create a new ReportUriMissingException.
+            </summary>
+        </member>
+        <member name="M:Aark.SecurityHeaders.Extension.Exceptions.ReportUriMissingException.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:Aark.SecurityHeaders.Extension.Exceptions.ReportUriMissingException.#ctor(System.String,System.Exception)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Aark.SecurityHeaders.Extension.Exceptions.ReportUriMissingException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+        </member>
         <member name="T:Aark.SecurityHeaders.Extension.MiddlewareExtensions">
             <summary>
             Middleware extensions.
@@ -569,7 +604,7 @@
             <param name="hostSources">List of source uri if the directive requires one.</param>
             <returns></returns>
         </member>
-        <member name="M:Aark.SecurityHeaders.Extension.SecurityHeadersBuilder.AddContentSecurityPolicy(Aark.SecurityHeaders.Extension.Constants.CommonPolicyDirective.Directive,Aark.SecurityHeaders.Extension.Constants.ContentSecurityPolicyConstants.FetchDirectives,Aark.SecurityHeaders.Extension.Constants.CommonPolicySchemeSource.SchemeSources,System.Collections.Generic.IList{System.Uri})">
+        <member name="M:Aark.SecurityHeaders.Extension.SecurityHeadersBuilder.AddContentSecurityPolicy(Aark.SecurityHeaders.Extension.Constants.CommonPolicyDirective.Directive,Aark.SecurityHeaders.Extension.Constants.ContentSecurityPolicyConstants.FetchDirectives,Aark.SecurityHeaders.Extension.Constants.CommonPolicySchemeSource.SchemeSources,System.Collections.Generic.IList{System.Uri},System.Boolean)">
             <summary>
             Adds a list of content security to which the provided directive is applied.
             </summary>
@@ -577,6 +612,7 @@
             <param name="fetchDirective">Content security fetch directive.</param>
             <param name="hostSources">List of uri if the directive requires one.</param>
             <param name="schemeSources">List of scheme source authorized.</param>
+            <param name="reportOnly">Indicates whether the rules are only there to generate a report.</param>
             <returns></returns>
         </member>
         <member name="M:Aark.SecurityHeaders.Extension.SecurityHeadersBuilder.AddExpectCT(System.Int32,System.Boolean)">

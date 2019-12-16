@@ -1,4 +1,5 @@
 ﻿using Aark.SecurityHeaders.Extension.Constants;
+using Aark.SecurityHeaders.Extension.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -150,9 +151,13 @@ namespace Aark.SecurityHeaders.Extension
         /// <param name="fetchDirective">Content security fetch directive.</param>
         /// <param name="hostSources">List of uri if the directive requires one.</param>
         /// <param name="schemeSources">List of scheme source authorized.</param>
+        /// <param name="reportOnly">Indicates whether the rules are only there to generate a report.</param>
         /// <returns></returns>
-        public SecurityHeadersBuilder AddContentSecurityPolicy(CommonPolicyDirective.Directive directive, ContentSecurityPolicyConstants.FetchDirectives fetchDirective, CommonPolicySchemeSource.SchemeSources schemeSources, IList<Uri> hostSources = null)
+        public SecurityHeadersBuilder AddContentSecurityPolicy(CommonPolicyDirective.Directive directive, ContentSecurityPolicyConstants.FetchDirectives fetchDirective, CommonPolicySchemeSource.SchemeSources schemeSources, IList<Uri> hostSources = null, bool reportOnly = true)
         {
+            if (reportOnly && _reportUri == null)
+                throw new ReportUriMissingException();
+
             if (fetchDirective.HasFlag(ContentSecurityPolicyConstants.FetchDirectives.ChildSrc))
                 _directives.TryAdd(ContentSecurityPolicyConstants.FetchDirectives.ChildSrc, directive);
             if (fetchDirective.HasFlag(ContentSecurityPolicyConstants.FetchDirectives.ConnectSrc))
@@ -185,7 +190,10 @@ namespace Aark.SecurityHeaders.Extension
             header += SchemeSourceToString(schemeSources);
             if (_reportUri != null)
                 header += "; " + CommonPolicyDirective.ReportUri + " " + _reportUri.AbsoluteUri;
-            _policy.SetHeaders[ContentSecurityPolicyConstants.Header] = header;
+            if (reportOnly)
+                _policy.SetHeaders[ContentSecurityPolicyConstants.HeaderReportOnly] = header;
+            else
+                _policy.SetHeaders[ContentSecurityPolicyConstants.Header] = header;
             return this;
         }
 

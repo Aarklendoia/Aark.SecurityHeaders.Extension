@@ -10,8 +10,13 @@ namespace Aark.SecurityHeaders.Extension.Constants
     public static partial class ContentSecurityPolicyConstants
     {
         /// <summary>
-        /// Header value for Content-Security-Policy
+        /// Header value for Content-Security-Policy.
         /// </summary>
         public static readonly string Header = "Content-Security-Policy";
+
+        /// <summary>
+        /// Header value for Content-Security-Policy-Report-Only.
+        /// </summary>
+        public static readonly string HeaderReportOnly = "Content-Security-Policy-Report-Only";
     }
 }
