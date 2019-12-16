@@ -20,6 +20,6 @@ jobs:
     - name: Build with dotnet
       run: dotnet build --configuration Release
     - name: SetAPIKey
-      run: nuget setapikey  ${{ secrets.GithubAarkSecurityHeadersExtension }} -Source "https://nuget.pkg.github.com/Aarklendoia/index.json" -NonInteractive
+      run: nuget setapikey  ${{ secrets.GithubAarkSecurityHeadersExtension }} -Source https://www.nuget.org/packages/Aark.SecurityHeaders.Extension/ -NonInteractive
     - name: nuget push
       run: nuget push Aark.SecurityHeaders.Extension\**\*.nupkg -source "GitHub" -SkipDuplicate
