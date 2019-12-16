@@ -13,7 +13,7 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.100
-    - name: Setup Nuget
+    - name: Setup NuGet
       uses: warrenbuckley/Setup-Nuget@v1
     - name: Add GPR Source using nuget.exe
       run: nuget source Add -Name "GitHub" -Source "https://nuget.pkg.github.com/Aarklendoia/index.json" -UserName Aarklendoia -Password ${{ secrets.GHPackagesToken }}
@@ -21,7 +21,7 @@ jobs:
       run: dotnet build --configuration Release
     - name: Push Github Package
       run: nuget push Aark.SecurityHeaders.Extension\**\*.nupkg -source "GitHub" -SkipDuplicate
-    - name: Add nuget API key
+    - name: Add NuGet API key
       run: nuget setapikey ${{ secrets.NugetAarkSecurityHeadersExtension }}
     - name: Push NuGet Gallery
       run: nuget push Aark.SecurityHeaders.Extension\**\*.nupkg -source https://api.nuget.org/v3/index.json -SkipDuplicate
