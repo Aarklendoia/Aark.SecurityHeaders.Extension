@@ -40,6 +40,43 @@ app.UseSecurityHeadersMiddleware(new SecurityHeadersBuilder()
     .AddCustomHeader("My header", "Hello !"));
 ```
 
+## Create a report server
+
+In order to easily debug your headers, especially for Content-Security-Policy, you must set up a server that will receive rule violations detected by browsers.
+
+To do this, you need a web server and a URI pointing to a script that recovers errors.
+
+Here is an example of a PHP script that logs errors and forwards them by email:
+```php
+<?php
+  // Send `204 No Content` status code.
+  http_response_code(204);
+  // collect data from post request
+  $data = file_get_contents('php://input');
+  if ($data = json_decode($data)) {
+    // Remove slashes from the JSON-formatted data.
+    $data = json_encode(
+      $data, JSON_UNESCAPED_SLASHES
+    );
+    // set options for syslog daemon
+    openlog('report-uri', LOG_NDELAY, LOG_USER);
+
+    // send warning about csp report
+    syslog(LOG_WARNING, $data);
+
+    mail('report@example.com', 'Report CSP rule violations', $data);
+  }
+?>
+```
+Then, declare the complete URI in your headers, for example:
+```csharp
+            app.UseSecurityHeadersMiddleware(new SecurityHeadersBuilder()
+                .AddDefaultSecurePolicy()
+                .AddReportUri(new Uri("https://report.example.com/report-uri.php"))
+                .AddContentSecurityPolicy(...);
+```
+**It is very important that this URI is different from that of your WebAPI because you may not receive the reports or send them back to a domain whose security may have been compromised.**
+
 ## Authors
 
 * **Édouard Biton** - *Initial work* - [AArklendoïa](https://www.aarklendoia.com)
