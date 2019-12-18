@@ -70,10 +70,10 @@ Here is an example of a PHP script that logs errors and forwards them by email:
 ```
 Then, declare the complete URI in your headers, for example:
 ```csharp
-            app.UseSecurityHeadersMiddleware(new SecurityHeadersBuilder()
-                .AddDefaultSecurePolicy()
-                .AddReportUri(new Uri("https://report.example.com/report-uri.php"))
-                .AddContentSecurityPolicy(...);
+app.UseSecurityHeadersMiddleware(new SecurityHeadersBuilder()
+    .AddDefaultSecurePolicy()
+    .AddReportUri(new Uri("https://report.example.com/report-uri.php"))
+    .AddContentSecurityPolicy(...);
 ```
 **It is very important that this URI is different from that of your WebAPI because you may not receive the reports or send them back to a domain whose security may have been compromised.**
 
