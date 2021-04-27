@@ -29,7 +29,7 @@ jobs:
       
     - name: Add GPR Source using nuget.exe
       run: |
-        nuget source Add -Name "GitHub" -Source "https://nuget.pkg.github.com/Aarklendoia/index.json" -UserName Aarklendoia
+        nuget source Add -Name "GitHub" -Source "https://nuget.pkg.github.com/Aarklendoia/index.json" -UserName Aarklendoia -Password ${{ secrets.GHPackagesToken }}
         nuget pack
         nuget push "Aark.SecurityHeaders.Extension\**\*.nupkg" -Source "GitHub"
       
