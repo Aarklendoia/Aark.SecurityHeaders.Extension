@@ -21,14 +21,17 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
       
-    - name: Add GPR Source using nuget.exe
-      run: nuget source Add -Name "GitHub" -Source "https://nuget.pkg.github.com/Aarklendoia/index.json" -UserName Aarklendoia -Password ${{ secrets.GHPackagesToken }}
-      
     - name: Build
       run: dotnet build --no-restore
       
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test --no-build --verbosity normal      
+      
+    - name: Add GPR Source using nuget.exe
+      run: |
+        nuget source Add -Name "GitHub" -Source "https://nuget.pkg.github.com/Aarklendoia/index.json" -UserName Aarklendoia
+        nuget pack
+        nuget push "Aark.SecurityHeaders.Extension\**\*.nupkg" -Source "GitHub"
       
     - name: Push Github Package
       run: nuget push Aark.SecurityHeaders.Extension\**\*.nupkg -source "GitHub" -SkipDuplicate
